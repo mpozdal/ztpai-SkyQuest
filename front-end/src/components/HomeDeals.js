@@ -3,11 +3,7 @@ import Carusele from './Carusele';
 
 function HomeDeals({ text }) {
 	return (
-		<div
-			style={{
-				background: '#99E2D9',
-			}}
-		>
+		<div>
 			<Carusele text={text} />
 		</div>
 	);

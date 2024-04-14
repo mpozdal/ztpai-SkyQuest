@@ -1,5 +1,6 @@
 const data = [
 	{
+		id: 0,
 		depart: 'Krakow',
 		arrive: 'Paris',
 		departureDate: '23.11',
@@ -9,6 +10,7 @@ const data = [
 		price: '123,00',
 	},
 	{
+		id: 1,
 		depart: 'Krakow',
 		arrive: 'Paris',
 		departureDate: '23.11',
@@ -18,6 +20,7 @@ const data = [
 		price: '123,00',
 	},
 	{
+		id: 2,
 		depart: 'Krakow',
 		arrive: 'Paris',
 		departureDate: '23.11',
@@ -27,6 +30,7 @@ const data = [
 		price: '123,00',
 	},
 	{
+		id: 3,
 		depart: 'Krakow',
 		arrive: 'Paris',
 		departureDate: '23.11',
@@ -36,6 +40,7 @@ const data = [
 		price: '123,00',
 	},
 	{
+		id: 4,
 		depart: 'Krakow',
 		arrive: 'Paris',
 		departureDate: '23.11',
@@ -45,6 +50,7 @@ const data = [
 		price: '123,00',
 	},
 	{
+		id: 5,
 		depart: 'Krakow',
 		arrive: 'Paris',
 		departureDate: '23.11',

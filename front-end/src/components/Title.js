@@ -50,9 +50,11 @@ export default function Title() {
 				>
 					SO&nbsp;EASY
 				</div>
-				<div className="landing-page-button hover:scale-105">
-					START EXPLORING
-				</div>
+				<a href="#desc" className="href">
+					<div className="landing-page-button hover:scale-105">
+						START EXPLORING
+					</div>
+				</a>
 			</div>
 		</>
 	);

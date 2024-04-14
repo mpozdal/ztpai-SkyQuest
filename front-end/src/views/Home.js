@@ -20,8 +20,10 @@ export default function Home() {
 				<Header />
 				<Title />
 			</div>
-			<HomeDeals text={'TRENDING'} />
-			<HomeDeals text={'LATEST DEALS'} />
+			<div className="background" id="desc">
+				<HomeDeals text={'TRENDING'} />
+				<HomeDeals text={'LATEST DEALS'} />
+			</div>
 		</div>
 	);
 }

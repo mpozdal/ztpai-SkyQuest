@@ -3,23 +3,24 @@ import { NavLink } from 'react-router-dom';
 export default function Header() {
 	return (
 		<header
-			className="d-flex w-100 p-5 fluid justify-content-between align-items-center "
+			className="d-flex w-100  fluid justify-content-between align-items-center"
 			style={{
 				height: '100px',
 				fontSize: '1em',
 			}}
 		>
 			<div
+				className="flex justify-content-center"
 				style={{
 					fontWeight: 700,
 					fontSize: '1.75em',
-					width: '35%',
+					width: '30%',
 				}}
 			>
 				SkyQuest
 			</div>
 			<div
-				className="d-flex justify-content-between"
+				className="d-flex justify-content-around "
 				style={{
 					cursor: 'pointer',
 
@@ -55,8 +56,9 @@ export default function Header() {
 				</NavLink>
 			</div>
 			<div
+				className=" d-flex justify-content-center "
 				style={{
-					width: '25%',
+					width: '35%',
 				}}
 			>
 				<NavLink to="/login" className="href ">
@@ -65,7 +67,7 @@ export default function Header() {
 						style={{
 							border: '3px solid white',
 							borderRadius: 15,
-							width: '30%',
+
 							textAlign: 'center',
 							marginLeft: 'auto',
 						}}
