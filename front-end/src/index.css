@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	padding: 0;
+	margin: 0;
+	font-family: 'Montserrat', sans-serif;
+	font-optical-sizing: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-weight: 600;
+	color: white;
+}
+::-webkit-scrollbar {
+	width: 0px;
+	background: transparent;
+}
+.scroll-container {
+}
+
+.href {
+	text-decoration: none;
+	color: white;
+
+	padding: 0.3rem 0.7rem 0.3rem 0.7rem;
+}
+.active {
+	background-color: rgba(255, 255, 255, 0.4);
+	border-radius: 15px;
+}
+.landing-page-button {
+	margin-top: 40px;
+	width: 250px;
+	height: 60px;
+	background: #c94f42;
+	text-align: center;
+	display: flex;
+	font-weight: 800;
+	justify-content: center;
+	align-items: center;
+	border-radius: 15px;
+}
+.landing-page-button:hover {
+	transition: 0.2s ease-in-out;
+
+	cursor: pointer;
+}
+
+.info {
+	color: rgba(201, 78, 64, 1);
+	font-weight: 700;
+}
+.data {
+	color: black;
+	font-weight: 700;
+}
+
+.deal:hover {
+	cursor: pointer;
+}
+.background {
+	width: 100%;
+	min-height: 100vh;
+	background-attachment: fixed;
+	z-index: 99;
+	position: relative;
+	overflow: hidden;
+}
+.background::after {
+	content: '';
+	min-height: 100vh;
+	background-image: url('../public/assets/background2.svg');
+	background-attachment: fixed;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	z-index: -99;
+	background-size: cover;
+	opacity: 0.3;
+	background-repeat: no-repeat;
+}
+.background::before {
+	content: '';
+	background-color: #99e2d9;
+	z-index: -100;
+	min-height: 100vh;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+}
+
+.signinBtn:hover {
+	background-color: white;
+	color: #99e2d9;
+	transition: 0.2s ease-in-out;
+}
