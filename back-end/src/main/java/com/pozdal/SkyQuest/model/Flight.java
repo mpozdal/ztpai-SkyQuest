@@ -26,6 +26,8 @@ public class Flight {
     private Integer stops;
     private String url;
     private String description;
+    private String price;
+    private String airlines;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;

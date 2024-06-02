@@ -6,6 +6,7 @@ package com.pozdal.SkyQuest.controller;
         import jakarta.persistence.Entity;
         import lombok.AllArgsConstructor;
         import lombok.NoArgsConstructor;
+        import org.apache.coyote.Response;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.http.ResponseEntity;
         import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ package com.pozdal.SkyQuest.controller;
 @RestController
 
 @RequestMapping("/api/v1")
+@CrossOrigin(origins = "*")
 public class FlightController {
 
     @Autowired
@@ -33,8 +35,9 @@ public class FlightController {
         return ResponseEntity.ok(flightService.flight(id));
     }
     @PostMapping("/flight")
-    public void addFlight(@RequestBody Flight newFlight) {
-        flightService.save(newFlight);
+    public ResponseEntity<Flight> addFlight(@RequestBody Flight newFlight) {
+        return ResponseEntity.ok(flightService.save(newFlight));
+
     }
     @DeleteMapping("/flight/{id}")
     public void deleteFlight(@PathVariable Integer id) {

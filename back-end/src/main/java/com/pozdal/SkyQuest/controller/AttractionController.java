@@ -14,16 +14,19 @@ import java.util.Optional;
 @RestController
 
 @RequestMapping("/api/v1")
+@CrossOrigin
 public class AttractionController {
 
     @Autowired
     private AttractionService attractionService;
     @GetMapping("/attraction")
-    public ResponseEntity<List<Attraction>> getAllFlights() {
+
+    public ResponseEntity<List<Attraction>> getAllAttractions() {
         return ResponseEntity.ok(attractionService.allAttraction());
     }
     @GetMapping("/attraction/{id}")
-    public ResponseEntity<Optional<Attraction>> getFlight(@PathVariable Integer id) {
+
+    public ResponseEntity<Optional<Attraction>> getAttraction(@PathVariable Integer id) {
         return ResponseEntity.ok(attractionService.attraction(id));
     }
     @PostMapping("/attraction")

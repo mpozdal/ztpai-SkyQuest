@@ -30,7 +30,7 @@ public class FlightService {
     public void delete(Integer id) {
           flightRepository.deleteById(id);
     }
-    public void save(Flight flight) {flightRepository.save(flight);}
+    public Flight save(Flight flight) {return flightRepository.save(flight);}
 
     public Flight update(Flight newFlight, Integer id) {
         return flightRepository.findById(id)

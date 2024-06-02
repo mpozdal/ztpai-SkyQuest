@@ -21,6 +21,8 @@ public class Restaurant {
     private String imgUrl;
     private String cusine;
     private String description;
+    private String price;
+    private String url;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;

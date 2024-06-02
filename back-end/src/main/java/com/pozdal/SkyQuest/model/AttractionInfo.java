@@ -20,7 +20,5 @@ public class AttractionInfo {
     private String openingHour;
     private String price;
     private String address;
-    @OneToOne(mappedBy = "attractionInfo")
-    private Attraction attraction;
 
 }
