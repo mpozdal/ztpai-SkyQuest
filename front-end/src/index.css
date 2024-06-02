@@ -24,8 +24,6 @@
 .href {
 	text-decoration: none;
 	color: white;
-
-	padding: 0.3rem 0.7rem 0.3rem 0.7rem;
 }
 .active {
 	background-color: rgba(255, 255, 255, 0.4);
@@ -68,6 +66,9 @@
 	z-index: 99;
 	position: relative;
 	overflow: hidden;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }
 .background::after {
 	content: '';
@@ -100,4 +101,38 @@
 	background-color: white;
 	color: #99e2d9;
 	transition: 0.2s ease-in-out;
+}
+.background2 {
+	width: 100%;
+	min-height: 100vh;
+	background-attachment: fixed;
+	z-index: 99;
+	position: relative;
+	overflow: hidden;
+}
+.background2::after {
+	content: '';
+	min-height: 100vh;
+	background-image: url('../public/assets/background2.svg');
+	background-attachment: fixed;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	z-index: -99;
+	background-size: cover;
+	opacity: 0.3;
+	background-repeat: no-repeat;
+}
+.background2::before {
+	content: '';
+	background-color: #99e2d9;
+	z-index: -100;
+	min-height: 100vh;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
 }

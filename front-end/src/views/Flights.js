@@ -1,13 +1,16 @@
 import React from 'react';
 import Header from '../components/Header';
 import Filter from '../components/Filter';
-import FlightsViewer from '../components/FlightsViewer';
+
+import ResultsList from '../components/ResultsList';
 function Flights() {
 	return (
 		<div className="background">
 			<Header />
 			<Filter />
-			<FlightsViewer />
+			<div className="w-[80%] flex justify-content-center flex-col ">
+				<ResultsList itemsPerPage={10} flight />
+			</div>
 		</div>
 	);
 }

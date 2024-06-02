@@ -1,4 +1,4 @@
-const data = [
+const data2 = [
 	{
 		id: 0,
 		depart: 'Krakow',
@@ -61,4 +61,4 @@ const data = [
 	},
 ];
 
-export default data;
+export default data2;

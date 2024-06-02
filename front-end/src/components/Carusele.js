@@ -9,7 +9,7 @@ function Carusele({ text }) {
 		dots: true,
 		infinite: true,
 		speed: 500,
-		slidesToShow: 5,
+		slidesToShow: 3,
 		slidesToScroll: 1,
 		responsive: [
 			{
@@ -40,11 +40,14 @@ function Carusele({ text }) {
 				{text}
 			</div>
 
-			<div className=" h-[450px]">
+			<div>
 				<Slider {...settings} className="">
-					{data.map((elem) => (
-						<Card data={elem} />
-					))}
+					<Card data={data[0]} />
+					<Card data={data[0]} />
+					<Card data={data[0]} />
+					<Card data={data[0]} />
+					<Card data={data[0]} />
+					<Card data={data[0]} />
 				</Slider>
 			</div>
 		</main>

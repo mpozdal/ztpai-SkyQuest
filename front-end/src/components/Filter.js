@@ -66,58 +66,54 @@ function Filter() {
 		}
 	};
 	return (
-		<div className="flex justify-content-center ">
-			<div className=" w-3/4  rounded-[50px] flex justify-content-between align-items-center p-10 gap-1 ">
-				<div className="w-full ">
-					<div className="text-[#c94f42] font-bold">FROM</div>
-					<Select
-						isMulti
-						className="w-full "
-						options={places}
-						placeholder={'City, airport or country'}
-						closeMenuOnSelect={false}
-						isSearchable={true}
-						styles={colourStyles}
-						value={selectedOptionsDepart}
-						onChange={setSelectedOptionsDepart}
-					/>
-				</div>
-				<div className="w-full">
-					<div className="text-[#c94f42] font-bold">TO</div>
-					<Select
-						isMulti
-						className="w-full"
-						options={[everywhereOption, ...places]}
-						placeholder={'City, airport or country'}
-						closeMenuOnSelect={false}
-						isSearchable={true}
-						styles={colourStyles}
-						onChange={handleChange2}
-						value={selectedOptionsArrive}
-					/>
-				</div>
-
-				<div className="w-full">
-					<div className="text-[#c94f42] font-bold">WHEN</div>
-					<Select
-						isMulti
-						className="w-full "
-						placeholder={''}
-						closeMenuOnSelect={false}
-						styles={colourStyles}
-						options={[allMonthsOption, ...dates]}
-						value={selectedOptionsDate}
-						onChange={handleChange}
-						defaultValue={allMonthsOption.value}
-					/>
-				</div>
-				<button class="mt-4 rounded-lg bg-[#000] px-8 py-2  text-white outline-none hover:opacity-80 focus:ring">
-					RESET
-				</button>
-				<button class="mt-4 rounded-lg bg-[#c94f42] px-8 py-2  text-white outline-none hover:opacity-80 focus:ring">
-					EXPLORE
-				</button>
+		<div className="w-[80%] flex justify-content-center gap-2">
+			<div className="w-full">
+				<div className="text-[#c94f42] font-bold">FROM</div>
+				<Select
+					isMulti
+					className="w-full "
+					options={places}
+					placeholder={'Airport or country'}
+					closeMenuOnSelect={false}
+					isSearchable={true}
+					styles={colourStyles}
+					value={selectedOptionsDepart}
+					onChange={setSelectedOptionsDepart}
+				/>
 			</div>
+			<div className="w-full">
+				<div className="text-[#c94f42] font-bold">TO</div>
+				<Select
+					isMulti
+					className="w-full"
+					options={[everywhereOption, ...places]}
+					placeholder={'Airport or country'}
+					closeMenuOnSelect={false}
+					isSearchable={true}
+					styles={colourStyles}
+					onChange={handleChange2}
+					value={selectedOptionsArrive}
+				/>
+			</div>
+
+			<div className="w-full">
+				<div className="text-[#c94f42] font-bold">WHEN</div>
+				<Select
+					isMulti
+					className="w-full "
+					placeholder={'Month'}
+					closeMenuOnSelect={false}
+					styles={colourStyles}
+					options={[allMonthsOption, ...dates]}
+					value={selectedOptionsDate}
+					onChange={handleChange}
+					defaultValue={allMonthsOption.value}
+				/>
+			</div>
+
+			<button class="mt-4 rounded-lg bg-[#c94f42] px-8 py-2  text-white outline-none hover:opacity-80 focus:ring">
+				EXPLORE
+			</button>
 		</div>
 	);
 }

@@ -1,14 +1,14 @@
 import React from 'react';
-import Card from './Card';
+import Result from './Result';
 
 import data from '../data';
 
 function FlightsViewer() {
 	return (
-		<div className="flex justify-content-center">
-			<div className="grid grid-cols-4 auto-rows-fr p-3 w-3/4 gap-3">
+		<div className="w-[80%] flex justify-content-center mt-5">
+			<div className="w-full flex flex-col gap-3">
 				{data.map((elem) => (
-					<Card data={elem} />
+					<Result />
 				))}
 			</div>
 		</div>

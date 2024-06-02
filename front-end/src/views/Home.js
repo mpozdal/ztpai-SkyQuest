@@ -4,7 +4,7 @@ import Title from '../components/Title';
 import HomeDeals from '../components/HomeDeals';
 export default function Home() {
 	return (
-		<div className="">
+		<div className="min-h-[100vh]">
 			<div
 				style={{
 					position: 'relative',
@@ -14,13 +14,13 @@ export default function Home() {
 					height: '100vh',
 					backgroundSize: 'cover',
 					backgroundRepeat: 'no-repeat',
-					scrollSnapAlign: 'center',
 				}}
+				className="flex justify-content-center"
 			>
 				<Header />
 				<Title />
 			</div>
-			<div className="background" id="desc">
+			<div className="background2" id="desc">
 				<HomeDeals text={'TRENDING'} />
 				<HomeDeals text={'LATEST DEALS'} />
 			</div>
