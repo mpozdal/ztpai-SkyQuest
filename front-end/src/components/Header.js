@@ -48,7 +48,7 @@ export default function Header() {
 				}}
 			>
 				<NavLink
-					className="href p-1"
+					className="href p-2"
 					//activeClassName="active"
 					to="/"
 				>
@@ -57,18 +57,18 @@ export default function Header() {
 				<NavLink
 					//activeClassName="active"
 					to="/flights"
-					className="href p-1"
+					className="href p-2"
 				>
 					Flights
 				</NavLink>
 				<NavLink
 					//activeClassName="active"
 					to="/attractions"
-					className="href p-1"
+					className="href p-2"
 				>
 					Attractions
 				</NavLink>
-				<NavLink to="/restaurants" className="href p-1">
+				<NavLink to="/restaurants" className="href p-2">
 					Restaurants
 				</NavLink>
 			</div>

@@ -3,7 +3,7 @@ import Select from 'react-select';
 import 'rsuite/DateRangePicker/styles/index.css';
 import axios from 'axios';
 
-function FilterAttractions() {
+function FilterAttractions({ items, setItems }) {
 	const colourStyles = {
 		multiValue: (provided) => ({
 			...provided,
@@ -39,6 +39,50 @@ function FilterAttractions() {
 	const [selectedOptionsCity, setSelectedOptionsCity] = useState([]);
 	const [selectedOptionsCategory, setSelectedOptionsCategory] = useState([]);
 
+	async function fetchAttractions(e) {
+		e.preventDefault();
+		let params = {};
+		if (
+			selectedOptionsCity.length > 0 &&
+			selectedOptionsCategory.length > 0
+		) {
+			params = {
+				city: selectedOptionsCity[0].value,
+				category: selectedOptionsCategory[0].value,
+			};
+		} else if (
+			selectedOptionsCity.length > 0 &&
+			selectedOptionsCategory.length === 0
+		) {
+			params = {
+				city: selectedOptionsCity[0].value,
+			};
+		} else if (
+			selectedOptionsCity.length === 0 &&
+			selectedOptionsCategory.length > 0
+		) {
+			params = {
+				category: selectedOptionsCategory[0].value,
+			};
+		}
+		try {
+			console.log(params);
+			await axios({
+				url: 'http://localhost:8080/api/v1/attraction-filter',
+				method: 'get',
+				params: params,
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}).then((response) => {
+				console.log(response);
+				setItems(response.data);
+			});
+		} catch (e) {
+			console.log(e);
+		}
+	}
+
 	return (
 		<div className="w-[80%] flex justify-content-center gap-2">
 			<div className="w-full">
@@ -70,7 +114,10 @@ function FilterAttractions() {
 				/>
 			</div>
 
-			<button class="mt-4 rounded-lg bg-[#c94f42] px-8 py-2  text-white outline-none hover:opacity-80 focus:ring">
+			<button
+				onClick={(e) => fetchAttractions(e)}
+				class="mt-4 rounded-lg bg-[#c94f42] px-8 py-2  text-white outline-none hover:opacity-80 focus:ring"
+			>
 				EXPLORE
 			</button>
 		</div>

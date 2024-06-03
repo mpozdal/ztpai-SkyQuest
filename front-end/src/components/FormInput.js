@@ -11,6 +11,7 @@ function FormInput({ data }) {
 				name={data.text}
 				value={data.value}
 				onChange={(e) => data.onChange(e.currentTarget.value)}
+				required
 			/>
 		</>
 	);

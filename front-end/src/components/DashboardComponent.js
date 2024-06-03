@@ -9,6 +9,7 @@ import AddForm from './AddForm';
 import AddRestaurantForm from './AddRestaurantForm';
 import Pending from './Pending';
 import DashboardResult from './DashboardResult';
+import isValidJwt from '../api/validate';
 function DashboardComponent({ option, setOption, userID }) {
 	const user = useAuth();
 	const [items, setItems] = useState([]);
@@ -25,7 +26,6 @@ function DashboardComponent({ option, setOption, userID }) {
 		try {
 			await axios({
 				url: 'http://localhost:8080/api/v1/user',
-
 				headers: {
 					Authorization: `Bearer ${user?.jwt}`,
 					'Content-Type': 'application/json',

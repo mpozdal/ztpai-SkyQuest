@@ -3,7 +3,7 @@ import Select from 'react-select';
 import 'rsuite/DateRangePicker/styles/index.css';
 import axios from 'axios';
 
-function FilterRestaurants() {
+function FilterRestaurants({ items, setItems }) {
 	const options = [
 		'Krakow',
 		'Zadar',
@@ -15,7 +15,6 @@ function FilterRestaurants() {
 		'Warsaw',
 	].map((item) => ({ label: item, value: item }));
 	const cusine = [
-		'All',
 		'Italian',
 		'Polish',
 		'Balkan',
@@ -26,8 +25,9 @@ function FilterRestaurants() {
 		'Kebab',
 		'Sushi',
 		'Asian',
+		'Syrian',
 	].map((item) => ({ label: item, value: item }));
-	const price = ['All', '$', '$$', '$$$', '$$$$', '$$$$$'].map((item) => ({
+	const price = ['$', '$$', '$$$', '$$$$', '$$$$$'].map((item) => ({
 		label: item,
 		value: item,
 	}));
@@ -50,6 +50,102 @@ function FilterRestaurants() {
 	const [selectedOptionsCity, setSelectedOptionsCity] = useState([]);
 	const [selectedOptionCusine, setSelectedOptionCusine] = useState([]);
 	const [selectedOptionPrice, setSelectedOptionPrice] = useState([]);
+
+	useEffect(() => {
+		fetchRestaurants();
+	}, [selectedOptionsCity, selectedOptionCusine, selectedOptionPrice]);
+
+	async function fetchRestaurants(e) {
+		if (e) e.preventDefault();
+		let params = {};
+		if (
+			selectedOptionsCity.length > 0 &&
+			selectedOptionCusine.length > 0 &&
+			selectedOptionPrice.length > 0
+		) {
+			params = {
+				city: selectedOptionsCity[0].value,
+				cusine: selectedOptionCusine[0].value,
+				price: selectedOptionPrice[0].value,
+			};
+		} else if (
+			selectedOptionsCity.length === 0 &&
+			selectedOptionCusine.length > 0 &&
+			selectedOptionPrice.length > 0
+		) {
+			params = {
+				price: selectedOptionPrice[0].value,
+				cusine: selectedOptionCusine[0].value,
+			};
+		} else if (
+			selectedOptionsCity.length > 0 &&
+			selectedOptionCusine.length > 0 &&
+			selectedOptionPrice.length === 0
+		) {
+			params = {
+				city: selectedOptionsCity[0].value,
+				cusine: selectedOptionCusine[0].value,
+			};
+		} else if (
+			selectedOptionsCity.length > 0 &&
+			selectedOptionCusine.length === 0 &&
+			selectedOptionPrice.length > 0
+		) {
+			params = {
+				city: selectedOptionsCity[0].value,
+				price: selectedOptionPrice[0].value,
+			};
+		} else if (
+			selectedOptionsCity.length > 0 &&
+			selectedOptionCusine.length > 0 &&
+			selectedOptionPrice.length === 0
+		) {
+			params = {
+				city: selectedOptionsCity[0].value,
+				cusine: selectedOptionCusine[0].value,
+			};
+		} else if (
+			selectedOptionsCity.length > 0 &&
+			selectedOptionCusine.length === 0 &&
+			selectedOptionPrice.length === 0
+		) {
+			params = {
+				city: selectedOptionsCity[0].value,
+			};
+		} else if (
+			selectedOptionsCity.length === 0 &&
+			selectedOptionCusine.length > 0 &&
+			selectedOptionPrice.length === 0
+		) {
+			params = {
+				cusine: selectedOptionCusine[0].value,
+			};
+		} else if (
+			selectedOptionsCity.length === 0 &&
+			selectedOptionCusine.length === 0 &&
+			selectedOptionPrice.length > 0
+		) {
+			params = {
+				price: selectedOptionPrice[0].value,
+			};
+		}
+		try {
+			console.log(params);
+			await axios({
+				url: 'http://localhost:8080/api/v1/restaurant-filter',
+				method: 'get',
+				params: params,
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}).then((response) => {
+				console.log(response);
+				setItems(response.data);
+			});
+		} catch (e) {
+			console.log(e);
+		}
+	}
 
 	return (
 		<div className="w-[80%] flex justify-content-center gap-2">
@@ -96,9 +192,12 @@ function FilterRestaurants() {
 				/>
 			</div>
 
-			<button class="mt-4 rounded-lg bg-[#c94f42] px-8 py-2  text-white outline-none hover:opacity-80 focus:ring">
+			{/* <button
+				onClick={(e) => fetchRestaurants(e)}
+				class="mt-4 rounded-lg bg-[#c94f42] px-8 py-2  text-white outline-none hover:opacity-80 focus:ring"
+			>
 				EXPLORE
-			</button>
+			</button> */}
 		</div>
 	);
 }

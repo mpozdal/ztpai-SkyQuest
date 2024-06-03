@@ -1,16 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 function FlightResult({ data }) {
+	console.log(data);
 	return (
-		<NavLink to="/flights/1" className={'href'}>
+		//<NavLink to={'/flights/' + data.id} className={'href'}>
+		<a href={data.url} className={'href'} target="__blank">
 			<div
 				className="position-relative h-[150px]  bg-white/10 rounded-[50px] shadow-lg  flex  cursor-pointer transition 
             ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-105 hover:bg-white/30 justify-content-between"
 			>
-				<div className="w-[150px] h-[130px] rounded-[50px] p-[10px]">
+				<div className="w-[150px] h-[150px] rounded-[50px] p-[10px]">
 					<img
-						src={'/assets/city.jpeg'}
-						className="w-[130px] h-[130px] rounded-[50px]"
+						src={`https://flagsapi.com/${data?.imgUrl}/flat/64.png`}
+						className="w-[130px] h-[130px] rounded-[50px] object-fill"
+						alt={data?.imgUrl}
 					/>
 				</div>
 				<div
@@ -42,14 +45,14 @@ function FlightResult({ data }) {
 					</div>
 					<div className="">
 						<div className="info">PRICE</div>
-						<div className="data">${data?.price}</div>
+						<div className="data">{data?.price} €</div>
 					</div>
 				</div>
 				<div className="  w-[50px] h-100 bg-[#c94f42] rounded-r-[50px] [writing-mode:vertical-lr] flex justify-content-center align-items-center">
-					WEEKEND
+					{data?.description}
 				</div>
 			</div>
-		</NavLink>
+		</a>
 	);
 }
 

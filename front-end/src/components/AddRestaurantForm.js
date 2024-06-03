@@ -40,7 +40,7 @@ function AddRestaurantForm() {
 
 				method: 'post',
 			}).then((response) => {
-				console.log(role);
+				console.log(response);
 				const reqBody = {
 					city: city,
 					cusine: cusine,
@@ -50,10 +50,10 @@ function AddRestaurantForm() {
 					name: name,
 					price: price,
 					url: url,
-					user_id: response?.data,
+					user: response?.data,
 				};
 				axios({
-					url: 'http://localhost:8080/api/v1/restaurant',
+					url: 'http://localhost:8080/api/v1/publish',
 					headers: {
 						Authorization: `Bearer ${user?.jwt}`,
 						'Content-Type': 'application/json',

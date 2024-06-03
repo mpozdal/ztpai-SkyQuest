@@ -1,11 +1,19 @@
-const isValidValue = (input, validValues) => {
-	const valid =
-		validValues.filter((validValue) => validValue === input).length > 0;
-	if (!valid) {
-		throw new Error(
-			`Input value ${input} not in set of valid values ${validValues}`
-		);
-	}
-};
+import axios from 'axios';
 
-export { isValidValue };
+async function isValidJwt(jwt) {
+	await axios({
+		url: 'http://localhost:8080/api/v1/auth/validate',
+		headers: {
+			Authorization: 'Bearer ' + jwt,
+			'Content-Type': 'application/json',
+		},
+		params: {
+			token: jwt,
+		},
+		method: 'get',
+	}).then((response) => {
+		console.log(response);
+	});
+}
+
+export default isValidJwt;

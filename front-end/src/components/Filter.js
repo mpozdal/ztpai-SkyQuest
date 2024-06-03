@@ -3,7 +3,7 @@ import Select from 'react-select';
 import 'rsuite/DateRangePicker/styles/index.css';
 import axios from 'axios';
 
-function Filter() {
+function Filter({ items, setItems }) {
 	const colourStyles = {
 		multiValue: (provided) => ({
 			...provided,
@@ -21,10 +21,10 @@ function Filter() {
 	};
 
 	const places = [
-		{ value: 'Krakow [KRK]', label: 'Krakow [KRK]' },
-		{ value: 'Katowice [KTW]', label: 'Katowice' },
-		{ value: 'Warszawa [WAW]', label: 'Warszawa' },
-		{ value: 'Warszawa [WMI]', label: 'Warszawa Modlin' },
+		{ value: 'Krakow', label: 'Krakow [KRK]' },
+		{ value: 'Katowice', label: 'Katowice' },
+		{ value: 'Warszawa', label: 'Warszawa' },
+		{ value: 'Warszawa', label: 'Warszawa Modlin' },
 		{ value: 'Poland', label: 'Poland' },
 	];
 	const dates = [
@@ -33,38 +33,63 @@ function Filter() {
 		{ value: 'june-2024', label: 'June 2024' },
 		{ value: 'july-2024', label: 'July 2024' },
 	];
-	const allMonthsOption = { value: 'all', label: 'All upcoming months' };
-	const everywhereOption = { value: 'everywhere', label: 'Everywhere' };
+
+	const [selectedOptionsDate, setSelectedOptionsDate] = useState([]);
 	const [selectedOptionsDepart, setSelectedOptionsDepart] = useState([]);
 	const [selectedOptionsArrive, setSelectedOptionsArrive] = useState([]);
-	const [selectedOptionsDate, setSelectedOptionsDate] = useState([]);
-
 	const handleChange = (selected) => {
 		setSelectedOptionsDate(selected);
-		if (selected.some((option) => option.value === 'all')) {
-			setSelectedOptionsDate([allMonthsOption]);
-		} else if (
-			selected.some((option) => option.value !== 'all') &&
-			selected.includes(allMonthsOption)
-		) {
-			setSelectedOptionsDate(
-				selected.filter((option) => option.value !== 'all')
-			);
-		}
+		
 	};
 	const handleChange2 = (selected) => {
 		setSelectedOptionsArrive(selected);
-		if (selected.some((option) => option.value === 'everywhere')) {
-			setSelectedOptionsArrive([everywhereOption]);
-		} else if (
-			selected.some((option) => option.value !== 'everywhere') &&
-			selected.includes(everywhereOption)
-		) {
-			setSelectedOptionsArrive(
-				selected.filter((option) => option.value !== 'everywhere')
-			);
-		}
+		
 	};
+
+	async function fetchFlights(e) {
+		e.preventDefault();
+		let params = {};
+		if (
+			selectedOptionsArrive.length > 0 &&
+			selectedOptionsDepart.length > 0
+		) {
+			params = {
+				depart: selectedOptionsDepart[0].value,
+				arrive: selectedOptionsArrive[0].value,
+			};
+		} else if (
+			selectedOptionsArrive.length > 0 &&
+			selectedOptionsDepart.length === 0
+		) {
+			params = {
+				arrive: selectedOptionsArrive[0].value,
+			};
+		} else if (
+			selectedOptionsArrive.length === 0 &&
+			selectedOptionsDepart.length > 0
+		) {
+			params = {
+				depart: selectedOptionsDepart[0].value,
+			};
+		}
+		try {
+			console.log(params);
+			await axios({
+				url: 'http://localhost:8080/api/v1/flight-filter',
+				method: 'get',
+				params: params,
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}).then((response) => {
+				console.log(response);
+				setItems(response.data);
+			});
+		} catch (e) {
+			console.log(e);
+		}
+	}
+
 	return (
 		<div className="w-[80%] flex justify-content-center gap-2">
 			<div className="w-full">
@@ -86,7 +111,7 @@ function Filter() {
 				<Select
 					isMulti
 					className="w-full"
-					options={[everywhereOption, ...places]}
+					options={places}
 					placeholder={'Airport or country'}
 					closeMenuOnSelect={false}
 					isSearchable={true}
@@ -104,14 +129,17 @@ function Filter() {
 					placeholder={'Month'}
 					closeMenuOnSelect={false}
 					styles={colourStyles}
-					options={[allMonthsOption, ...dates]}
+					options={dates}
 					value={selectedOptionsDate}
 					onChange={handleChange}
-					defaultValue={allMonthsOption.value}
+					
 				/>
 			</div>
 
-			<button class="mt-4 rounded-lg bg-[#c94f42] px-8 py-2  text-white outline-none hover:opacity-80 focus:ring">
+			<button
+				onClick={(e) => fetchFlights(e)}
+				class="mt-4 rounded-lg bg-[#c94f42] px-8 py-2  text-white outline-none hover:opacity-80 focus:ring"
+			>
 				EXPLORE
 			</button>
 		</div>

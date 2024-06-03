@@ -4,23 +4,29 @@ import ReactPaginate from 'react-paginate';
 import RestaurantResult from './RestaurantResult';
 import FlightResult from './FlightResult';
 import axios from 'axios';
-function ResultsList({ itemsPerPage, restaurant, attraction, flight }) {
-	const [items, setItems] = useState([]);
+function ResultsList({
+	itemsPerPage,
+	restaurant,
+	attraction,
+	flight,
+	items,
+	setItems,
+}) {
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
-		if (flight) fetchFlights();
-		else if (restaurant) fetchRestaurants();
-		else if (attraction) fetchAttractions();
+		if (flight) fetchData('flight');
+		else if (restaurant) fetchData('restaurant');
+		else if (attraction) fetchData('attraction');
 	}, []);
 	useEffect(() => {
-		if (items.length > 0) {
+		if (items?.length > 0) {
 			setIsLoading(false);
 		}
 	}, [items]);
-	async function fetchFlights() {
+	async function fetchData(type) {
 		try {
 			await axios({
-				url: 'http://localhost:8080/api/v1/flight',
+				url: 'http://localhost:8080/api/v1/' + type,
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -28,38 +34,6 @@ function ResultsList({ itemsPerPage, restaurant, attraction, flight }) {
 			}).then((response) => {
 				console.log(response.data);
 				setItems(response?.data);
-			});
-		} catch (e) {
-			console.log(e);
-		}
-	}
-	async function fetchRestaurants() {
-		try {
-			await axios({
-				url: 'http://localhost:8080/api/v1/restaurant',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				method: 'get',
-			}).then((response) => {
-				setItems(response.data);
-				setIsLoading(false);
-			});
-		} catch (e) {
-			console.log(e);
-		}
-	}
-	async function fetchAttractions() {
-		try {
-			await axios({
-				url: 'http://localhost:8080/api/v1/attraction',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				method: 'get',
-			}).then((response) => {
-				setItems(response.data);
-				setIsLoading(false);
 			});
 		} catch (e) {
 			console.log(e);
@@ -73,12 +47,12 @@ function ResultsList({ itemsPerPage, restaurant, attraction, flight }) {
 	useEffect(() => {
 		const endOffset = itemOffset + itemsPerPage;
 		console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-		setCurrentItems(items.slice(itemOffset, endOffset));
-		setPageCount(Math.ceil(items.length / itemsPerPage));
+		setCurrentItems(items?.slice(itemOffset, endOffset));
+		setPageCount(Math.ceil(items?.length / itemsPerPage));
 	}, [itemOffset, itemsPerPage, items]);
 
 	const handlePageClick = (event) => {
-		const newOffset = (event.selected * itemsPerPage) % items.length;
+		const newOffset = (event.selected * itemsPerPage) % items?.length;
 		console.log(
 			`User requested page number ${event.selected}, which is offset ${newOffset}`
 		);
@@ -92,14 +66,18 @@ function ResultsList({ itemsPerPage, restaurant, attraction, flight }) {
 				{currentItems &&
 					restaurant &&
 					currentItems.map((item) => (
-						<RestaurantResult data={item} />
+						<RestaurantResult data={item} key={item.id} />
 					))}
 				{currentItems &&
 					flight &&
-					currentItems.map((item) => <FlightResult data={item} />)}
+					currentItems.map((item) => (
+						<FlightResult data={item} key={item.id} />
+					))}
 				{currentItems &&
 					attraction &&
-					currentItems.map((item) => <Result item={item} />)}
+					currentItems.map((item) => (
+						<Result item={item} key={item.id} />
+					))}
 			</div>
 			<ReactPaginate
 				nextLabel="next >"

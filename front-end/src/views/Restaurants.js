@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Select from 'react-select';
 import ResultsList from '../components/ResultsList';
@@ -20,12 +20,18 @@ function Restaurants() {
 			};
 		},
 	};
+	const [items, setItems] = useState([]);
 	return (
 		<div className="background ">
 			<Header />
-			<FilterRestaurants />
+			<FilterRestaurants items={items} setItems={setItems} />
 			<div className="w-[80%] flex justify-content-center flex-col">
-				<ResultsList itemsPerPage={10} restaurant={true} />
+				<ResultsList
+					itemsPerPage={10}
+					restaurant={true}
+					items={items}
+					setItems={setItems}
+				/>
 			</div>
 		</div>
 	);

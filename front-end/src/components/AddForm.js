@@ -4,6 +4,9 @@ import axios from 'axios';
 import useAuth from '../hook/useAuth';
 import Modal from '../components/Modal';
 import FormInput from './FormInput';
+import Select from 'react-select';
+import { format, parseISO } from 'date-fns';
+
 function AddForm() {
 	const [departureDate, setDepartureDate] = useState('');
 	const [returnDate, setReturnDate] = useState('');
@@ -12,9 +15,11 @@ function AddForm() {
 	const [price, setPrice] = useState('');
 	const [stops, setStops] = useState('');
 	const [image, setImage] = useState('');
+	const [desc, setDesc] = useState('');
 	const [airlines, setAirlines] = useState('');
 	const [url, setUrl] = useState('');
 	const [modalVisible, setModalVisible] = useState(false);
+
 	const user = useAuth();
 	useEffect(() => {
 		const timer = setTimeout(() => {
@@ -24,13 +29,14 @@ function AddForm() {
 	}, [modalVisible]);
 	async function addFlight(e) {
 		e.preventDefault();
+
 		const reqBody = {
 			arrive: arrive,
 			depart: depart,
-			departure_date: departureDate,
-			description: 'lorem ipsum',
-			img_url: image,
-			return_date: returnDate,
+			departureDate: Date.parse(departureDate),
+			description: desc,
+			imgUrl: image,
+			return_date: Date.parse(returnDate),
 			stops: stops,
 			url: url,
 			airlines: airlines,
@@ -127,6 +133,14 @@ function AddForm() {
 						text: 'Image',
 						value: image,
 						onChange: setImage,
+						type: 'text',
+					}}
+				/>
+				<FormInput
+					data={{
+						text: 'Description',
+						value: desc,
+						onChange: setDesc,
 						type: 'text',
 					}}
 				/>
