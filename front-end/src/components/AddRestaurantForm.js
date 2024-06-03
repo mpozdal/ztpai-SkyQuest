@@ -50,20 +50,24 @@ function AddRestaurantForm() {
 					name: name,
 					price: price,
 					url: url,
-					user: response?.data,
 				};
-				axios({
-					url: 'http://localhost:8080/api/v1/publish',
-					headers: {
-						Authorization: `Bearer ${user?.jwt}`,
-						'Content-Type': 'application/json',
-					},
-					data: JSON.stringify(reqBody),
-					method: 'post',
-				}).then((response) => {
-					console.log(response);
-					setModalVisible(true);
-				});
+				try {
+					axios({
+						url: 'http://localhost:8080/api/v1/publish',
+						headers: {
+							Authorization: `Bearer ${user?.jwt}`,
+							'Content-Type': 'application/json',
+							'Access-Control-Allow-Origin': '*',
+						},
+						data: JSON.stringify(reqBody),
+						method: 'post',
+					}).then((response) => {
+						console.log(response);
+						setModalVisible(true);
+					});
+				} catch (e) {
+					console.log(e);
+				}
 			});
 		} catch (e) {
 			console.log(e);

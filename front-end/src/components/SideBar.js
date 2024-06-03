@@ -5,7 +5,7 @@ function SideBar({ setOption }) {
 	const user = useAuth();
 
 	return (
-		<div class="relative flex flex-col bg-clip-border rounded-xl  h-[calc(100vh-100px)] text-gray-700 w-full max-w-[20rem] p-4 bg-black bg-opacity-10">
+		<div class="relative flex flex-col bg-clip-border rounded-xl  h-[calc(100vh-100px)] text-gray-700 w-[200px] md:w-full max-w-[20rem] p-4 bg-black bg-opacity-10">
 			<div class="mb-2 p-4">
 				<h5 class="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-white">
 					Admin dashboard

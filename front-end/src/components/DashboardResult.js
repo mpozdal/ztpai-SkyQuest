@@ -8,7 +8,7 @@ function DashboardResult({ data, type }) {
 	const user = useAuth();
 	const [modal, setModal] = useState(false);
 	return (
-		<div className="position-relative h-[150px]  bg-white/10 rounded-[50px]   flex   justify-content-between m-[10px]">
+		<div className="position-relative h-[300px] md:h-[150px]  bg-white/10 rounded-[50px]   flex   justify-content-between m-[10px]">
 			{modal && <ModalInfo data={data} type={type} setModal={setModal} />}
 			<div
 				className=" p-[15px] text-[#c94f42] font-bold text-xl text-uppercase 

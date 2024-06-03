@@ -7,7 +7,7 @@ function RestaurantResult({ data }) {
 	return (
 		<a href={data?.url} target="_blank" className={'href'}>
 			<div
-				className="position-relative h-[150px] bg-white/10 rounded-[50px] shadow-lg  flex  cursor-pointer transition 
+				className="position-relative h-[300px] md:h-[150px] bg-white/10 rounded-[50px] shadow-lg  flex  cursor-pointer transition 
             ease-in-out delay-150 hover:-translate-y-1  duration-300 hover:scale-105 hover:bg-white/30"
 			>
 				<div className="w-[50px] h-100 bg-[#c94f42]  rounded-l-[50px] [writing-mode:vertical-rl] flex justify-content-center align-items-center">

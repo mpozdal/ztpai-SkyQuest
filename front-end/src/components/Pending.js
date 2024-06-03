@@ -35,11 +35,11 @@ export default Pending;
 function RestaurantResult({ data }) {
 	console.log(data);
 	return (
-		<div className="w-100">
-			<div className="position-relative h-[150px]  bg-white/10 rounded-[50px]   flex   justify-content-between m-[10px]">
+		<div className="w-100 ">
+			<div className="position-relative h-[300px]  md:h-[150px]  bg-white/10 rounded-[50px]   flex   justify-content-between m-[10px]">
 				<div
 					className=" p-[15px] text-[#c94f42] font-bold text-xl text-uppercase 
-			 text-center flex justify-content-around align-items-center w-full"
+			 text-center flex justify-content-around align-items-center w-full flex-col md:flex-row"
 				>
 					<div className=" ">
 						<div className="info">CATEGORY</div>

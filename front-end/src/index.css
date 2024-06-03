@@ -25,10 +25,10 @@
 	text-decoration: none;
 	color: white;
 }
-.active {
-	background-color: rgba(255, 255, 255, 0.4);
-	border-radius: 15px;
+.mobileMenu {
+	font-size: 3rem;
 }
+
 .landing-page-button {
 	margin-top: 40px;
 	width: 250px;

@@ -84,7 +84,7 @@ function FilterAttractions({ items, setItems }) {
 	}
 
 	return (
-		<div className="w-[80%] flex justify-content-center gap-2">
+		<div className="w-[80%] flex justify-content-center gap-2 flex-col md:flex-row">
 			<div className="w-full">
 				<div className="text-[#c94f42] font-bold">WHERE</div>
 				<Select
