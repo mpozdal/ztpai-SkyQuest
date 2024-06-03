@@ -15,7 +15,7 @@ import java.util.Optional;
 @RestController
 
 @RequestMapping("/api/v1")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class RestaurantController {
 
     @Autowired
@@ -33,6 +33,11 @@ public class RestaurantController {
 
         return ResponseEntity.ok(restaurantService.getUserPendingRestaurants(email));
     }
+    @GetMapping("/restaurant-filter")
+    public ResponseEntity<List<Restaurant>> getFilterRestaurant(@RequestParam(value="city", required = false) String city, @RequestParam(value="cusine", required = false) String cusine, @RequestParam(value="price", required = false) String price) {
+
+        return ResponseEntity.ok(restaurantService.getFilterRestaurant(city, cusine, price));
+    }
     @GetMapping("/restaurant-pending")
     public ResponseEntity<List<Restaurant>> getPendingRestaurants() {
         return ResponseEntity.ok(restaurantService.getPendingRestaurants());
@@ -45,6 +50,20 @@ public class RestaurantController {
     @PostMapping("/restaurant")
     public void addAttraction(@RequestBody Restaurant newRestaurant) {
         restaurantService.save(newRestaurant);
+
+//        restaurantService.createRestaurant(
+//                newRestaurant.getName(),
+//                newRestaurant.getCity(),
+//                newRestaurant.getImgUrl(),
+//                newRestaurant.getUrl(),
+//                newRestaurant.getCusine(),
+//                newRestaurant.getDescription(),
+//                newRestaurant.getPrice(),
+//                newRestaurant.getStatus(),
+//                newRestaurant.getStatus()
+//
+//
+//        );
     }
     @DeleteMapping("/restaurant/{id}")
     public void deleteAttraction(@PathVariable Integer id) {

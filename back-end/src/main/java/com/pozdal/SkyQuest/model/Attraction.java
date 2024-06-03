@@ -20,12 +20,13 @@ public class Attraction {
     private String city;
     private String imgUrl;
     private String category;
+    private String url;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "attraction_id", referencedColumnName = "id")
-    private AttractionInfo attractionInfo;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "attraction_id", referencedColumnName = "id")
+//    private AttractionInfo attractionInfo;
     @Enumerated(EnumType.STRING)
     private Status status;
 }

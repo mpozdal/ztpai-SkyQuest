@@ -17,8 +17,6 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService userService;
-
-
     @GetMapping("/user")
     public ResponseEntity<List<User>> allUsers() {
         return ResponseEntity.ok(userService.allUsers());
@@ -27,8 +25,9 @@ public class UserController {
     public ResponseEntity<Optional<User>> getUser(@PathVariable Integer id) {
         return ResponseEntity.ok(userService.user(id));
     }
+
     @PostMapping("/user-get")
-    public ResponseEntity<Integer> getUserByEmail(@RequestParam String email) {
+    public ResponseEntity<Optional<User>> getUserByEmail(@RequestParam String email) {
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
     @DeleteMapping("/user/{id}")

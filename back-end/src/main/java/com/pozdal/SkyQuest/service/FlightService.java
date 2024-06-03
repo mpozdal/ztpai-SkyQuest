@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class FlightService {
@@ -31,6 +32,18 @@ public class FlightService {
           flightRepository.deleteById(id);
     }
     public Flight save(Flight flight) {return flightRepository.save(flight);}
+
+    public List<Flight> getFilterFlights(String depart, String arrive) {
+        if (depart != null && arrive != null) {
+            return flightRepository.findByDepartAndArrive(depart, arrive);
+        } else if (depart != null) {
+            return flightRepository.findByDepart(depart);
+        } else if (arrive != null) {
+            return flightRepository.findByArrive(arrive);
+        } else {
+            return flightRepository.findAll();
+        }
+    }
 
     public Flight update(Flight newFlight, Integer id) {
         return flightRepository.findById(id)

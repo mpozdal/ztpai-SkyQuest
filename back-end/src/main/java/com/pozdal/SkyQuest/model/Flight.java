@@ -29,18 +29,7 @@ public class Flight {
     private String price;
     private String airlines;
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     private User user;
 
-    public Flight(String depart, String arrive, Date departureDate, Date returnDate, String imgUrl, Integer stops, String url, String description, User user) {
-        this.depart = depart;
-        this.arrive = arrive;
-        this.departureDate = departureDate;
-        this.returnDate = returnDate;
-        this.imgUrl = imgUrl;
-        this.stops = stops;
-        this.url = url;
-        this.description = description;
-        this.user = user;
-    }
 }

@@ -28,4 +28,5 @@ public class Restaurant {
     private User user;
     @Enumerated(EnumType.STRING)
     private Status status;
+
 }

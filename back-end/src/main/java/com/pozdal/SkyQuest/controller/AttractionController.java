@@ -2,6 +2,7 @@ package com.pozdal.SkyQuest.controller;
 
 import com.pozdal.SkyQuest.model.Attraction;
 import com.pozdal.SkyQuest.model.Flight;
+import com.pozdal.SkyQuest.model.Restaurant;
 import com.pozdal.SkyQuest.service.AttractionService;
 import com.pozdal.SkyQuest.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.Optional;
 @RestController
 
 @RequestMapping("/api/v1")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class AttractionController {
 
     @Autowired
@@ -28,6 +29,10 @@ public class AttractionController {
 
     public ResponseEntity<Optional<Attraction>> getAttraction(@PathVariable Integer id) {
         return ResponseEntity.ok(attractionService.attraction(id));
+    }
+    @GetMapping("/attraction-filter")
+    public ResponseEntity<List<Attraction>> getFilterRestaurant(@RequestParam(value="city", required = false) String city, @RequestParam(value="category", required = false) String category) {
+        return ResponseEntity.ok(attractionService.getFilterAttraction(city, category));
     }
     @PostMapping("/attraction")
     public void addAttraction(@RequestBody Attraction newAttraction) {

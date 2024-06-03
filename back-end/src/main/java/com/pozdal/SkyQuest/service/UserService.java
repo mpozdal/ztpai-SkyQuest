@@ -25,13 +25,9 @@ public class UserService {
     public void delete(Integer id) {
         userRepository.deleteById(id);
     }
-    public Integer getUserByEmail(String email) {
-        Optional<User> user = userRepository.findByEmail(email);
-        if(user.isPresent()) {
-            User temp = user.get();
-            return temp.getId();
-        }
-        return null;
+    public Optional<User> getUserByEmail(String email) {
+       return userRepository.findByEmail(email);
+
     }
 
     public User update(User newUser, Integer id) {

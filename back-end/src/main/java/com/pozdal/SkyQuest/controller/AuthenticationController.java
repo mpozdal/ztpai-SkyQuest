@@ -19,7 +19,7 @@ import ch.qos.logback.core.util.Duration;
 
 @RequestMapping("/api/v1/auth")
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class AuthenticationController {
     private final JwtService jwtService;
     @Value("${cookies.domain}")

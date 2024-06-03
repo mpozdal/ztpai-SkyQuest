@@ -13,13 +13,13 @@ package com.pozdal.SkyQuest.controller;
 
         import java.util.List;
         import java.util.Optional;
+        import java.util.Set;
 
 @RestController
 
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "*")
 public class FlightController {
-
     @Autowired
     private FlightService flightService;
     @GetMapping("/trending-flights")
@@ -30,6 +30,14 @@ public class FlightController {
     public ResponseEntity<List<Flight>> getAllFlights() {
         return ResponseEntity.ok(flightService.allFlights());
     }
+
+
+    @GetMapping("/flight-filter")
+    public ResponseEntity<List<Flight>> getFilterFlights(@RequestParam(value = "depart", required = false) String depart,
+                                                         @RequestParam(value = "arrive", required = false) String arrive) {
+        return ResponseEntity.ok(flightService.getFilterFlights(depart, arrive));
+    }
+
     @GetMapping("/flight/{id}")
     public ResponseEntity<Optional<Flight>> getFlight(@PathVariable Integer id) {
         return ResponseEntity.ok(flightService.flight(id));
