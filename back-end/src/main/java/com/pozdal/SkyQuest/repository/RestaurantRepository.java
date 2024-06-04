@@ -10,11 +10,11 @@ import java.util.List;
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
     List<Restaurant> findByStatus(Status status);
     List<Restaurant> findByStatusAndUser_id(Status status, Integer id);
-    List <Restaurant> findByCityAndCusineAndPrice(String city, String cusine, String price);
-    List <Restaurant> findByCity(String city);
-    List <Restaurant> findByCusine(String cusine);
-    List <Restaurant> findByPrice(String price);
-    List <Restaurant> findByCusineAndCity(String cusine, String city);
-    List <Restaurant> findByPriceAndCusine(String price, String cusine);
-    List <Restaurant> findByPriceAndCity(String price, String city);
+    List <Restaurant> findByCityAndCusineAndPriceAndStatus(String city, String cusine, String price, Status status);
+    List <Restaurant> findByCityAndStatus(String city, Status status);
+    List <Restaurant> findByCusineAndStatus(String cusine, Status status);
+    List <Restaurant> findByPriceAndStatus(String price, Status status);
+    List <Restaurant> findByCusineAndCityAndStatus(String cusine, String city, Status status);
+    List <Restaurant> findByPriceAndCusineAndStatus(String price, String cusine, Status status);
+    List <Restaurant> findByPriceAndCityAndStatus(String price, String city, Status status);
 }

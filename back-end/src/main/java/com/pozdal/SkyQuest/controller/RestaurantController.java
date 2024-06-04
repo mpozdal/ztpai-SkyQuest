@@ -1,6 +1,7 @@
 package com.pozdal.SkyQuest.controller;
 
 import com.pozdal.SkyQuest.model.Attraction;
+import com.pozdal.SkyQuest.model.Flight;
 import com.pozdal.SkyQuest.model.Restaurant;
 import com.pozdal.SkyQuest.repository.RestaurantRepository;
 import com.pozdal.SkyQuest.service.AttractionService;
@@ -42,10 +43,15 @@ public class RestaurantController {
     public ResponseEntity<List<Restaurant>> getPendingRestaurants() {
         return ResponseEntity.ok(restaurantService.getPendingRestaurants());
     }
+
     @GetMapping("/restaurant/{id}")
 
     public ResponseEntity<Optional<Restaurant>> getAttraction(@PathVariable Integer id) {
         return ResponseEntity.ok(restaurantService.restaurant(id));
+    }
+    @PutMapping("/restaurant/{id}")
+    public void updateRestaurant(@RequestBody Restaurant newRestaurant, @PathVariable Integer id) {
+        restaurantService.update(newRestaurant);
     }
     @PostMapping("/restaurant")
     public void addAttraction(@RequestBody Restaurant newRestaurant) {

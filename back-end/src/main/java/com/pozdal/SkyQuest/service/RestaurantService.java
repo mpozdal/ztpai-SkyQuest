@@ -1,9 +1,6 @@
 package com.pozdal.SkyQuest.service;
 
-import com.pozdal.SkyQuest.model.Attraction;
-import com.pozdal.SkyQuest.model.Restaurant;
-import com.pozdal.SkyQuest.model.Status;
-import com.pozdal.SkyQuest.model.User;
+import com.pozdal.SkyQuest.model.*;
 import com.pozdal.SkyQuest.repository.AttractionRepository;
 import com.pozdal.SkyQuest.repository.RestaurantRepository;
 import com.pozdal.SkyQuest.repository.UserRepository;
@@ -33,22 +30,25 @@ public class RestaurantService {
     }
     public List<Restaurant> getFilterRestaurant(String city, String cusine, String price) {
         if (city != null && cusine != null && price != null) {
-            return restaurantRepository.findByCityAndCusineAndPrice(city, cusine, price);
+            return restaurantRepository.findByCityAndCusineAndPriceAndStatus(city, cusine, price, Status.ACCEPTED);
         } else if (city != null) {
-            return restaurantRepository.findByCity(city);
+            return restaurantRepository.findByCityAndStatus(city, Status.ACCEPTED);
         } else if (cusine != null) {
-            return restaurantRepository.findByCusine(cusine);
+            return restaurantRepository.findByCusineAndStatus(cusine, Status.ACCEPTED);
         } else if(price != null) {
-            return restaurantRepository.findByPrice(price);
+            return restaurantRepository.findByPriceAndStatus(price, Status.ACCEPTED);
         } else if(cusine != null && city != null) {
-            return restaurantRepository.findByCusineAndCity(cusine, city);
+            return restaurantRepository.findByCusineAndCityAndStatus(cusine, city, Status.ACCEPTED);
         } else if(price != null && city != null) {
-            return restaurantRepository.findByPriceAndCity(price, city);
+            return restaurantRepository.findByPriceAndCityAndStatus(price, city, Status.ACCEPTED);
         } else if(price != null && cusine != null) {
-            return restaurantRepository.findByPriceAndCusine(price, cusine);
+            return restaurantRepository.findByPriceAndCusineAndStatus(price, cusine, Status.ACCEPTED);
         } else {
-            return restaurantRepository.findAll();
+            return restaurantRepository.findByStatus(Status.ACCEPTED);
         }
+    }
+    public void update(Restaurant newRestaurant) {
+        restaurantRepository.save(newRestaurant);
     }
     public List<Restaurant> getUserPendingRestaurants(String email) {
         Optional<User> userOptional = userRepository.findByEmail(email);
