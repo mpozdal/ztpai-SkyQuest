@@ -4,16 +4,13 @@ import useAuth from '../hook/useAuth';
 import Modal from '../components/Modal';
 import FormInput from './FormInput';
 import { jwtDecode } from 'jwt-decode';
-function AddRestaurantForm() {
+function AddAttractionForm() {
 	const [city, setCity] = useState('');
-	const [cusine, setCusine] = useState('');
-	const [description, setDescription] = useState('');
+
+	const [category, setCategory] = useState('');
 	const [image, setImage] = useState('');
 	const [name, setName] = useState('');
-
-	const [price, setPrice] = useState('');
 	const [url, setUrl] = useState('');
-
 	const [modalVisible, setModalVisible] = useState(false);
 	const [role, setRole] = useState();
 	const user = useAuth();
@@ -27,52 +24,36 @@ function AddRestaurantForm() {
 	}, [modalVisible]);
 	async function addRestaurant(e) {
 		e.preventDefault();
-		
+
 		try {
+			const reqBody = {
+				city: city,
+				category: category,
+				imgUrl: image,
+				name: name,
+				url: url,
+			};
+
 			await axios({
-				url:
-					'http://localhost:8080/api/v1/user-get?email=' + user?.email,
+				url: 'http://localhost:8080/api/v1/attraction',
 				headers: {
 					Authorization: `Bearer ${user?.jwt}`,
 					'Content-Type': 'application/json',
-					'Access-Control-Allow-Origin': '*',
 				},
-
+				data: JSON.stringify(reqBody),
 				method: 'post',
 			}).then((response) => {
 				console.log(response);
-				const reqBody = {
-					city: city,
-					cusine: cusine,
-					status: role === 'USER' ? 'IN_REVIEW' : 'ACCEPTED',
-					description: 'lorem ipsum',
-					imgUrl: image,
-					name: name,
-					price: price,
-					url: url,
-					user: response?.data,
-				};
-				try {
-					axios({
-						url: 'http://localhost:8080/api/v1/publish',
-						headers: {
-							Authorization: `Bearer ${user?.jwt}`,
-							'Content-Type': 'application/json',
-							'Access-Control-Allow-Origin': '*',
-						},
-						data: JSON.stringify(reqBody),
-						method: 'post',
-					}).then((response) => {
-						console.log(response);
-						setModalVisible(true);
-					});
-				} catch (e) {
-					console.log(e);
-				}
+				setModalVisible(true);
 			});
 		} catch (e) {
 			console.log(e);
 		}
+		setCategory('');
+		setName('');
+		setUrl('');
+		setImage('');
+		setCity('');
 	}
 
 	return (
@@ -101,21 +82,13 @@ function AddRestaurantForm() {
 				/>
 				<FormInput
 					data={{
-						text: 'Cusine',
-						value: cusine,
-						onChange: setCusine,
+						text: 'Category',
+						value: category,
+						onChange: setCategory,
 						type: 'text',
 					}}
 				/>
 
-				<FormInput
-					data={{
-						text: 'Price',
-						value: price,
-						onChange: setPrice,
-						type: 'text',
-					}}
-				/>
 				<FormInput
 					data={{
 						text: 'Url',
@@ -145,4 +118,4 @@ function AddRestaurantForm() {
 	);
 }
 
-export default AddRestaurantForm;
+export default AddAttractionForm;

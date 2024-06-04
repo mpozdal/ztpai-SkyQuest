@@ -43,9 +43,17 @@ function Filter({ items, setItems }) {
 	const handleChange2 = (selected) => {
 		setSelectedOptionsArrive(selected);
 	};
+	useEffect(() => {
+		if (
+			selectedOptionsDate.length === 0 &&
+			selectedOptionsDepart.length === 0 &&
+			selectedOptionsArrive.length === 0
+		)
+			fetchFlights();
+	}, [selectedOptionsDate, selectedOptionsDepart, selectedOptionsArrive]);
 
 	async function fetchFlights(e) {
-		e.preventDefault();
+		if (e) e.preventDefault();
 		let params = {};
 		if (
 			selectedOptionsArrive.length > 0 &&

@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import DashboardResultFlight from './DashboardResultFlight';
 import axios from 'axios';
-import DashboardResultAttraction from './DashboardResultAttraction';
-import DashboardResultRestaurant from './DashboardResultRestaurant';
-import DashboardResultUsers from './DashboardResultUsers';
 import useAuth from '../hook/useAuth';
 import AddForm from './AddForm';
 import AddRestaurantForm from './AddRestaurantForm';
+import AddAttractionForm from './AddAttractionForm';
 import Pending from './Pending';
 import DashboardResult from './DashboardResult';
 import isValidJwt from '../api/validate';
@@ -102,7 +99,7 @@ function DashboardComponent({ option, setOption, userID }) {
 			{option === 'add-flight' && <AddForm />}
 			{option === 'pending' && <Pending />}
 			{option === 'add-restaurant' && <AddRestaurantForm />}
-			{option === 'add-attraction' && <AddRestaurantForm />}
+			{option === 'add-attraction' && <AddAttractionForm />}
 		</div>
 	);
 }

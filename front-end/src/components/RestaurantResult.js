@@ -1,9 +1,7 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa6';
-import restaurantColors from '../restaurantColors';
-import { NavLink } from 'react-router-dom';
+
 function RestaurantResult({ data }) {
-	console.log(data);
 	return (
 		<a href={data?.url} target="_blank" className={'href'}>
 			<div

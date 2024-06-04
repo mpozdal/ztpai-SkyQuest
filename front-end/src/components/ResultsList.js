@@ -15,7 +15,7 @@ function ResultsList({
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
 		if (flight) fetchData('flight');
-		else if (restaurant) fetchData('restaurant');
+		else if (restaurant) fetchData('restaurant-confirmed');
 		else if (attraction) fetchData('attraction');
 	}, []);
 	useEffect(() => {
@@ -24,6 +24,7 @@ function ResultsList({
 		}
 	}, [items]);
 	async function fetchData(type) {
+		console.log(type);
 		try {
 			await axios({
 				url: 'http://localhost:8080/api/v1/' + type,

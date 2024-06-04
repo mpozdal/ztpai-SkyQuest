@@ -4,7 +4,30 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import data from '../data';
+import axios from 'axios';
 function Carusele({ text }) {
+	const [items, setItems] = useState([]);
+	useEffect(() => {
+		fetchFlights();
+	}, []);
+
+	async function fetchFlights() {
+		try {
+			await axios({
+				url: 'http://localhost:8080/api/v1/flight',
+				method: 'get',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}).then((response) => {
+				setItems(response?.data);
+				console.log(response);
+			});
+		} catch (e) {
+			console.log(e);
+		}
+	}
+
 	var settings = {
 		dots: true,
 		infinite: true,
@@ -42,12 +65,9 @@ function Carusele({ text }) {
 
 			<div>
 				<Slider {...settings} className="">
-					<Card data={data[0]} />
-					<Card data={data[0]} />
-					<Card data={data[0]} />
-					<Card data={data[0]} />
-					<Card data={data[0]} />
-					<Card data={data[0]} />
+					{items.map((item) => (
+						<Card data={item} />
+					))}
 				</Slider>
 			</div>
 		</main>
